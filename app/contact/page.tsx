@@ -23,20 +23,17 @@ export default function ContactPage() {
     reset,
   } = useForm<ContactFormData>()
 
-  // Enable scrolling on this page
   useEffect(() => {
     document.documentElement.style.overflowY = 'auto'
     document.body.style.overflowY = 'auto'
     
     return () => {
-      // Restore original overflow when leaving the page
       document.documentElement.style.overflowY = 'hidden'
       document.body.style.overflowY = 'hidden'
     }
   }, [])
 
   const onSubmit = async (data: ContactFormData) => {
-    // Simulate form submission
     await new Promise((resolve) => setTimeout(resolve, 1000))
     setIsSubmitted(true)
     reset()
@@ -71,7 +68,6 @@ export default function ContactPage() {
       animate="visible"
       className="min-h-screen bg-background-DEFAULT"
     >
-      {/* Header */}
       <motion.header
         variants={itemVariants}
         className="sticky top-0 z-50 bg-background-DEFAULT/80 backdrop-blur-md border-b border-gray-800"
@@ -99,12 +95,10 @@ export default function ContactPage() {
             >
               Contact Us
             </Link>
-            {/* <DarkModeToggle /> */}
           </nav>
         </div>
       </motion.header>
 
-      {/* Main Content */}
       <main className="max-w-4xl mx-auto px-6 py-12">
         <motion.div variants={itemVariants} className="text-center mb-12">
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
@@ -121,7 +115,6 @@ export default function ContactPage() {
             onSubmit={handleSubmit(onSubmit)}
             className="bg-background-card rounded-lg p-8 space-y-6"
           >
-            {/* Name Field */}
             <div>
               <label
                 htmlFor="name"
@@ -143,7 +136,6 @@ export default function ContactPage() {
               )}
             </div>
 
-            {/* Email Field */}
             <div>
               <label
                 htmlFor="email"
@@ -171,7 +163,6 @@ export default function ContactPage() {
               )}
             </div>
 
-            {/* Subject Field */}
             <div>
               <label
                 htmlFor="subject"
@@ -193,7 +184,6 @@ export default function ContactPage() {
               )}
             </div>
 
-            {/* Message Field */}
             <div>
               <label
                 htmlFor="message"
@@ -215,7 +205,6 @@ export default function ContactPage() {
               )}
             </div>
 
-            {/* Submit Button */}
             <motion.button
               type="submit"
               whileHover={{ scale: 1.02 }}
@@ -225,7 +214,6 @@ export default function ContactPage() {
               {isSubmitted ? 'Message Sent!' : 'Send Message'}
             </motion.button>
 
-            {/* Success Message */}
             {isSubmitted && (
               <motion.div
                 initial={{ opacity: 0, y: -10 }}

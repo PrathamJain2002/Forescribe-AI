@@ -9,14 +9,12 @@ export default function DarkModeToggle() {
 
   useEffect(() => {
     setMounted(true)
-    // Check localStorage first, then fallback to class check
     const theme = localStorage.getItem('theme')
     const darkMode = theme 
       ? theme === 'dark' 
       : document.documentElement.classList.contains('dark')
     setIsDark(darkMode)
     
-    // Ensure the class matches the state
     if (darkMode) {
       document.documentElement.classList.add('dark')
     } else {
@@ -35,7 +33,6 @@ export default function DarkModeToggle() {
     localStorage.setItem('theme', newMode ? 'dark' : 'light')
   }
 
-  // Prevent hydration mismatch by not rendering until mounted
   if (!mounted) {
     return (
       <div className="p-2 rounded-lg bg-background-card">

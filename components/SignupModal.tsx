@@ -12,7 +12,6 @@ export default function SignupModal({ onClose }: SignupModalProps) {
   const router = useRouter()
   const [loadingButton, setLoadingButton] = useState<'google' | 'microsoft' | null>(null)
 
-  // Handle ESC key to close modal
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
       if (e.key === 'Escape' && !loadingButton) {
@@ -25,7 +24,6 @@ export default function SignupModal({ onClose }: SignupModalProps) {
 
   const handleGoogleSignup = async () => {
     setLoadingButton('google')
-    // Simulate API call
     await new Promise((resolve) => setTimeout(resolve, 1000))
     setLoadingButton(null)
     router.push('/home')
@@ -33,7 +31,6 @@ export default function SignupModal({ onClose }: SignupModalProps) {
 
   const handleMicrosoftSignup = async () => {
     setLoadingButton('microsoft')
-    // Simulate API call
     await new Promise((resolve) => setTimeout(resolve, 1000))
     setLoadingButton(null)
     router.push('/home')
@@ -80,7 +77,6 @@ export default function SignupModal({ onClose }: SignupModalProps) {
         className="fixed inset-0 z-20 flex flex-col items-center justify-center p-4"
       >
         <div className="relative w-full max-w-md">
-          {/* Blur overlay - positioned exactly behind the modal */}
           <motion.div
             variants={modalVariants}
             initial="hidden"
@@ -103,7 +99,6 @@ export default function SignupModal({ onClose }: SignupModalProps) {
             className="rounded-2xl p-8 w-full shadow-2xl relative z-10"
             style={{ backgroundColor: '#00000033' }}
           >
-          {/* Logo */}
           <motion.div
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
@@ -117,7 +112,6 @@ export default function SignupModal({ onClose }: SignupModalProps) {
             />
           </motion.div>
 
-          {/* Title */}
           <motion.h1
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
@@ -132,7 +126,6 @@ export default function SignupModal({ onClose }: SignupModalProps) {
             Welcome to Forescribe
           </motion.h1>
 
-          {/* Buttons */}
           <div className="space-y-4 mb-6">
             <motion.button
               whileHover={{ scale: 1.02 }}
@@ -207,7 +200,6 @@ export default function SignupModal({ onClose }: SignupModalProps) {
           </motion.div>
         </div>
 
-        {/* Legal Text - Outside modal, below it */}
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}

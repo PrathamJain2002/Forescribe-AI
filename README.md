@@ -2,6 +2,10 @@
 
 A high-quality, responsive, and interactive frontend interface built with Next.js, TypeScript, and TailwindCSS. This project implements a modern signup/login interface with smooth animations and a multi-page structure.
 
+## 🌐 Live Demo
+
+The project is deployed and available at: **[https://forescribe-ai-taupe.vercel.app/](https://forescribe-ai-taupe.vercel.app/)**
+
 ## 🚀 Features
 
 - **Modern Design**: Dark-themed interface matching the Figma design
@@ -63,8 +67,9 @@ forescribe-ai/
 │   ├── layout.tsx            # Root layout component
 │   └── page.tsx              # Signup/Login page (landing)
 ├── components/
-│   ├── BackgroundGrid.tsx    # Grid of content cards
+│   ├── BackgroundGrid.tsx    # Background grid with random Group images
 │   ├── DarkModeToggle.tsx    # Dark mode toggle component
+│   ├── Logo.tsx              # Logo component
 │   ├── PageTransition.tsx    # Page transition wrapper
 │   ├── SignupModal.tsx       # Signup/Login modal
 │   └── SignupPage.tsx        # Main signup page component
@@ -79,20 +84,29 @@ forescribe-ai/
 ## 🎨 Design Implementation
 
 ### Signup/Login Page
-- **Background Grid**: Displays a grid of content cards (people, companies, services) that dim when the modal is open
+- **Background Grid**: 5-column responsive grid displaying random Group images (13 different images) that dim when the modal is open
+  - Staggered layout: odd columns start at top, even columns start at middle of odd rows
+  - Images scale responsively to fill screen vertically
+  - Grid positioned at 70% from top, allowing rows to be cut off at top/bottom
+- **Gradient Overlay**: Translucent gradient from #000000 (top-left) to #8B3DFF (bottom-right)
+- **Fixed Header**: Logo positioned absolutely at top-left (43px from top, 120px from left)
 - **Centered Modal**: Welcome modal with:
-  - Forescribe logo
-  - "Welcome to Forescribe" title
-  - "Continue with Google" button (purple)
-  - "Continue with Microsoft" button (gray)
-  - Legal text with links to Terms & Conditions and Privacy Policy
+  - Animated Forescribe logo (GIF)
+  - "Welcome to Forescribe" title (Poppins font, 22px, weight 600)
+  - "Continue with Google" button (#8B3DFF background) with Google logo
+  - "Continue with Microsoft" button (#4A4A4A background) with Microsoft logo
+  - Individual loading states for each button (only clicked button shows spinner)
+  - Legal text positioned below modal with links to Terms & Conditions and Privacy Policy
+  - Blur effect applied to background directly behind modal
 
 ### Animations
-- **Hover Effects**: Cards and buttons scale and lift on hover
-- **Page Transitions**: Smooth fade-in/out transitions between pages
-- **Content Reveals**: Staggered animations for grid items
-- **Form Interactions**: Focus animations on input fields
-- **Loading States**: Spinner animations during form submission
+- **Hover Effects**: Buttons scale on hover (1.02x) and tap (0.98x)
+- **Page Transitions**: Smooth fade-in/out transitions between pages using Framer Motion
+- **Content Reveals**: Staggered animations for background grid items (0.05s delay between items)
+- **Form Interactions**: Focus ring animations on input fields
+- **Loading States**: Individual spinner animations for each signup button (only the clicked button shows loader)
+- **Modal Animations**: Scale and fade-in animations for modal appearance
+- **Header Animations**: Fade-in and slide-down animation for header logo
 
 ## 🔧 Technologies Used
 
@@ -105,15 +119,20 @@ forescribe-ai/
 
 ## 📱 Responsive Breakpoints
 
-- **Mobile**: < 768px (2 columns for grid)
-- **Tablet**: 768px - 1024px (3 columns for grid)
-- **Desktop**: > 1024px (4 columns for grid)
+- **Background Grid**: Always 5 columns (one centered, 2 on each side)
+  - Images scale responsively based on screen width
+  - Extra rows added for mobile/tablet to ensure full screen coverage
+  - Mobile (< 768px): 5 extra rows
+  - Tablet (768px - 1024px): 3 extra rows
+  - Desktop (> 1024px): 2 extra rows
+- **Contact Page**: Scrollable content with sticky header
+- **Modal**: Centered with max-width constraints for all screen sizes
 
 ## 🎯 Assumptions Made
 
 1. **Authentication**: The signup buttons simulate authentication. In a production environment, you would integrate with actual OAuth providers (Google, Microsoft).
 
-2. **Image Sources**: Background grid uses placeholder images from Unsplash. In production, these would be replaced with actual user/company images.
+2. **Image Sources**: Background grid uses 13 Group images (Group 39685.png through Group 39701.png) from the public folder. Each grid item randomly selects one of these images when rendered.
 
 3. **Form Submission**: The contact form simulates submission. In production, this would connect to a backend API.
 
@@ -121,19 +140,28 @@ forescribe-ai/
 
 5. **Routing**: After "signing in", users are redirected to `/home`. The signup page is at the root `/`.
 
-6. **Content Cards**: The background grid displays sample data. In production, this would be fetched from an API.
+6. **Background Grid**: The background grid displays a 5-column layout (one centered, 2 on each side) with random Group images. Odd columns start at the top, even columns start at the middle of odd rows, creating a staggered visual effect. Images are scaled responsively (1.3x scale factor) and positioned at 70% from the top to ensure full screen coverage.
+7. **Non-scrollable Background**: The signup page background is fixed and non-scrollable. Only the contact page has scrolling enabled.
+8. **Button Alignment**: Both signup buttons have their logos and text aligned to start at the same horizontal position while being centered within the button.
 
 ## ✨ Additional Features Implemented
 
-1. **Dark Mode Toggle**: Functional dark mode toggle component (though dark mode is default)
-2. **Form Validation**: Complete form validation with error messages
-3. **Loading States**: Visual feedback during async operations
-4. **Accessibility**: Proper semantic HTML, ARIA labels, and keyboard navigation
-5. **Smooth Transitions**: Page transitions and micro-interactions throughout
-6. **Responsive Navigation**: Mobile-friendly navigation menu
-7. **Terms & Privacy Pages**: Complete legal pages linked from the signup modal
+1. **Individual Button Loading States**: Each signup button (Google/Microsoft) shows its own loading spinner independently
+2. **Random Image Selection**: Background grid randomly selects from 13 Group images for visual variety
+3. **Staggered Grid Layout**: Odd and even columns are offset vertically for visual interest
+4. **Gradient Overlay**: Custom gradient overlay with adjustable opacity for better modal visibility
+5. **Blur Effect**: Localized blur effect applied only to the area behind the modal
+6. **Form Validation**: Complete form validation with error messages using react-hook-form
+7. **Scroll Management**: Contact page has scrolling enabled while signup page remains fixed
+8. **Accessibility**: Proper semantic HTML, ARIA labels, keyboard navigation (ESC to close modal)
+9. **Responsive Image Scaling**: Background images scale dynamically to fill screen without cutting off
+10. **Terms & Privacy Pages**: Complete legal pages linked from the signup modal
 
 ## 🚀 Deployment
+
+### Live Demo
+
+The project is deployed on Vercel and accessible at: **[https://forescribe-ai-taupe.vercel.app/](https://forescribe-ai-taupe.vercel.app/)**
 
 ### Deploy to Vercel (Recommended)
 
@@ -153,15 +181,18 @@ npm start
 
 - The project uses Next.js 14 App Router
 - All components are client-side rendered where needed (`'use client'`)
-- Images are optimized using Next.js Image component
+- Logo component uses Next.js Image component with unoptimized prop
+- Background grid uses regular `<img>` tags for better control over responsive sizing
 - TailwindCSS is configured with custom colors matching the design
 - TypeScript strict mode is enabled for better type safety
+- All comments have been removed from the codebase for production readiness
+- Gradient overlay uses inline styles for precise color control
+- Modal uses backdrop-filter for blur effect (with webkit prefix for browser compatibility)
 
 ## 🐛 Known Limitations
 
 - OAuth integration is simulated (not connected to real providers)
 - Form submissions are simulated (no backend integration)
-- Image optimization requires external image domains to be configured
 
 ## 📄 License
 
